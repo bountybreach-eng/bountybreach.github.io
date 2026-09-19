@@ -30,6 +30,7 @@
     </nav>
     <div style="display:flex;gap:8px;">
       <a class="btn btn-secondary" href="docs.html#startup">Run Locally</a>
+      <a class="btn btn-secondary" href="roadmap.html">Roadmap</a>
       <a class="btn btn-primary" href="https://secureone.bountybreach.com/auth/login" target="_blank">Login →</a>
     </div>
   </div>
@@ -48,7 +49,8 @@
       <a href="#run-scan">7. Run First Scan</a>
       <a href="#review-results">8. Review Findings</a>
       <a href="#actions">9. Triage & Actions</a>
-      <a href="#next-steps">10. Next Steps</a>
+      <a href="#ai-remediation">10. Configure AI Remediation</a>
+      <a href="#next-steps">11. Next Steps</a>
     </nav>
   </aside>
 
@@ -194,7 +196,7 @@
         <li>Open <strong>Agents</strong> and generate registration/upload/heartbeat tokens.</li>
         <li>Start the agent with your config and tokens.</li>
         <li>Confirm agent status changes to <strong>Online</strong>.</li>
-        <li>Validate tool image settings (SAST/SCA/Secrets/DAST) if required.</li>
+        <li>Validate tool image settings, including SecureGrep for SAST, if required.</li>
       </ol>
       <div class="guide-tip">Tip: Start with one agent for onboarding, then scale per team/workspace.</div>
     
@@ -224,7 +226,7 @@
       <h2>6) Configure Scan</h2>
       <ol>
         <li>Open <strong>Scans → New Scan</strong>.</li>
-        <li>Select repository, branch, and scan types (SAST/SCA/Secrets/DAST).</li>
+        <li>Select repository, branch, and scan types (SecureGrep SAST/SCA/Secrets/DAST).</li>
         <li>Choose policy thresholds (e.g., fail on critical findings).</li>
         <li>Save as a reusable template if your team runs similar scans.</li>
       </ol>
@@ -342,8 +344,18 @@
       <!-- AUTO_SCREENSHOTS_END -->
 </article>
 
+    <article class="guide-section" id="ai-remediation">
+      <h2>10) Configure AI Automatic Remediation</h2>
+      <ol>
+        <li>Open <strong>Settings → AI Automatic Remediation</strong>.</li>
+        <li>Select repositories directly or discover them through a campaign and business bucket.</li>
+        <li>Configure SAST severity, CWE/CVE, risk score, CVSS, and maximum AI fix attempts.</li>
+        <li>Save the policy foundation; continuous AI fix generation and validation are planned for a later release.</li>
+      </ol>
+    </article>
+
     <article class="guide-section" id="next-steps">
-      <h2>10) Next Steps</h2>
+      <h2>11) Next Steps</h2>
       <ul>
         <li>Add additional repositories and environments.</li>
         <li>Configure scheduled scans and notifications.</li>

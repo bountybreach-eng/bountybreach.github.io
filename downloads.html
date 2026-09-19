@@ -434,6 +434,7 @@
     </nav>
     <div style="display:flex;gap:8px;">
       <a class="btn btn-secondary" href="docs.html#startup">Run Locally</a>
+      <a class="btn btn-secondary" href="roadmap.html">Roadmap</a>
       <a class="btn btn-primary" href="https://secureone.bountybreach.com/auth/login" target="_blank">Login →</a>
     </div>
   </div>
@@ -465,6 +466,34 @@
             oneStepDeployment: {
         label: "One-Step Deployment",
         versions: {
+          "v2026.09.18": {
+            status: "Stable",
+            releaseDate: "September 18, 2026",
+            downloads: [
+              { platform: "Shell Script", type: "deploy-ghcr-stack-v2026.09.18.sh", action: "deploy-ghcr-stack-v2026.09.18.sh", mode: "download" },
+              { platform: "Linux / macOS", type: "./deploy-ghcr-stack.sh v2026.09.18", action: "chmod +x deploy-ghcr-stack.sh\n./deploy-ghcr-stack.sh v2026.09.18", mode: "copy" },
+              { platform: "Windows", type: "bash ./deploy-ghcr-stack.sh v2026.09.18", action: "bash ./deploy-ghcr-stack.sh v2026.09.18", mode: "copy" }
+            ],
+            install: {
+              windows: ["Open Git Bash in the deployment folder.", "Run: bash ./deploy-ghcr-stack.sh v2026.09.18"],
+              linux: ["chmod +x deploy-ghcr-stack.sh", "./deploy-ghcr-stack.sh v2026.09.18"],
+              docker: ["Pulls the coordinated SecureOne, Scan Agent, and AI Foundation v2026.09.18 images.", "Starts the complete stack."],
+              macos: ["Use the Linux installation steps in Terminal."]
+            },
+            scripts: [],
+            requirements: ["Docker Engine 24.x or later", "Docker Compose", "Git Bash on Windows", "Internet access for image pulls"],
+            releaseNotes: {
+              newFeatures: ["SecureGrep initial SAST scanning integrated with SecureOne and Scan Agents.", "AI Automatic Remediation configuration foundation for SAST findings.", "Persistent remediation configuration, repository scope, criteria, and retry settings."],
+              improvements: ["Coordinated v2026.09.18 deployment across all platform components.", "Improved SecureGrep rule-pack and container workflow support."],
+              bugFixes: ["Improved license delivery and runtime validation consistency."],
+              breakingChanges: ["None."],
+              securityUpdates: ["SecureGrep runs through the isolated Scan Agent container workflow.", "AI remediation creates no change or PR until future validation workflows pass."]
+            },
+            knownIssues: ["Docker Desktop must be running before deployment."],
+            upgradeNotes: ["Deploy the coordinated v2026.09.18 release set.", "Review the SecureGrep and AI Automatic Remediation release notes before rollout."],
+            docs: [{ label: "Deployment Guide", href: "deployment.html" }],
+            dockerImage: "deploy-ghcr-stack.sh v2026.09.18"
+          },
           "v2026.08.27": {
             status: "Stable",
             releaseDate: "August 27, 2026",
@@ -1028,6 +1057,30 @@
       secureone: {
         label: 'SecureOne',
         versions: {
+          'v2026.09.18': {
+            status: 'Stable',
+            releaseDate: 'September 18, 2026',
+            dockerImage: 'ghcr.io/bountybreach/secureone:v2026.09.18',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '4 GB RAM recommended'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/secureone:v2026.09.18', action: 'docker pull ghcr.io/bountybreach/secureone:v2026.09.18', mode: 'copy' }],
+            install: {
+              windows: ['Run: bash ./docker-start.sh v2026.09.18', 'Run: bash ./docker-run-local.sh v2026.09.18'],
+              linux: ['Run: chmod +x docker-start.sh docker-run-local.sh', 'Run: ./docker-start.sh v2026.09.18', 'Run: ./docker-run-local.sh v2026.09.18'],
+              docker: ['Pull ghcr.io/bountybreach/secureone:v2026.09.18 and start the local stack.'],
+              macos: ['Follow the Linux steps in Terminal.']
+            },
+            scripts: [{ title: 'secureone/docker-start.sh', path: 'secureone/docker-start.sh' }, { title: 'secureone/docker-run-local.sh', path: 'secureone/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['SecureGrep initial SAST scanning and custom rule-pack integration.', 'AI Automatic Remediation configuration UI, API, model, and persistence for SAST.', 'Repository, campaign, and business-bucket remediation scope configuration.'],
+              improvements: ['Added stored remediation criteria for severity, CWE, CVE, risk score, CVSS, and maximum attempts.', 'Improved GitHub App-first repository discovery with PAT fallback.'],
+              bugFixes: ['Improved configuration loading and browser form persistence for remediation settings.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['AI remediation remains configuration-only in this release; no automatic PR or merge is performed.']
+            },
+            knownIssues: ['Continuous AI fix generation and validation are planned for a later release.'],
+            upgradeNotes: ['Review SecureGrep SAST setup and AI Automatic Remediation configuration after upgrading.'],
+            docs: [{ label: 'User Manual', href: 'docs.html' }, { label: 'Deployment Guide', href: 'deployment.html' }]
+          },
           'v2026.08.27': {
             status: 'Stable',
             releaseDate: 'August 27, 2026',
@@ -1388,6 +1441,30 @@
       scanAgents: {
         label: 'SecureOne Scan Agents',
         versions: {
+          'v2026.09.18': {
+            status: 'Stable',
+            releaseDate: 'September 18, 2026',
+            dockerImage: 'ghcr.io/bountybreach/secureone_scan_agent:v2026.09.18',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '2 GB RAM minimum'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/secureone_scan_agent:v2026.09.18', action: 'docker pull ghcr.io/bountybreach/secureone_scan_agent:v2026.09.18', mode: 'copy' }],
+            install: {
+              windows: ['Run: bash ./docker-start.sh v2026.09.18', 'Run: bash ./docker-run-local.sh v2026.09.18'],
+              linux: ['Run: chmod +x docker-start.sh docker-run-local.sh', 'Run: ./docker-start.sh v2026.09.18', 'Run: ./docker-run-local.sh v2026.09.18'],
+              docker: ['Pull the Scan Agent image and launch it with the local orchestrator.'],
+              macos: ['Use the Linux commands in Terminal.']
+            },
+            scripts: [{ title: 'secureone_scan_agents/docker-start.sh', path: 'secureone_scan_agents/docker-start.sh' }, { title: 'secureone_scan_agents/docker-run-local.sh', path: 'secureone_scan_agents/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['SecureGrep SAST execution through the isolated container-based Scan Agent workflow.', 'SecureGrep rule-pack support and result collection for SecureOne findings.'],
+              improvements: ['Improved repository checkout and report handling for full and fast scan modes.', 'Aligned runtime license and release packaging behavior.'],
+              bugFixes: ['Improved scan command construction and report persistence.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['SecureGrep workloads remain isolated inside the Scan Agent container.']
+            },
+            knownIssues: ['Local antivirus can slow first container startup.'],
+            upgradeNotes: ['Rebuild local images and validate SecureGrep tool image configuration after upgrading.'],
+            docs: [{ label: 'Agent Docs', href: 'docs.html' }, { label: 'Integrations', href: 'integrations.html' }]
+          },
           'v2026.08.27': {
             status: 'Stable',
             releaseDate: 'August 27, 2026',
@@ -1723,6 +1800,30 @@
       aiFoundation: {
         label: 'BountyBreach AI Foundation',
         versions: {
+          'v2026.09.18': {
+            status: 'Stable',
+            releaseDate: 'September 18, 2026',
+            dockerImage: 'ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.09.18',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '8 GB RAM recommended for local AI workflows'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.09.18', action: 'docker pull ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.09.18', mode: 'copy' }],
+            install: {
+              windows: ['Install Docker Desktop and run the foundation startup script from Git Bash.'],
+              linux: ['Use the compose or startup scripts from the project root.'],
+              docker: ['Pull and run the foundation v2026.09.18 image with the required environment variables.'],
+              macos: ['Use the Linux installation flow in Terminal.']
+            },
+            scripts: [{ title: 'bountybreach-ai-foundation/docker-start.sh', path: 'bountybreach-ai-foundation/docker-start.sh' }, { title: 'bountybreach-ai-foundation/docker-run-local.sh', path: 'bountybreach-ai-foundation/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['Foundation release alignment for the SecureGrep SAST and AI Automatic Remediation foundation.', 'Configuration-driven SAST remediation workflow integration point.'],
+              improvements: ['Improved deployment and license artifact consistency for coordinated SecureOne releases.'],
+              bugFixes: ['Improved default license discovery and RS256 license activation compatibility.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['AI-generated fixes, rescans, validation, and PR workflows remain planned for the next phase.']
+            },
+            knownIssues: ['Initial model cache download can take several minutes.'],
+            upgradeNotes: ['Validate license discovery and SecureOne AI integration after upgrading.'],
+            docs: [{ label: 'Foundation Docs', href: 'docs.html' }, { label: 'Admin Panel Guide', href: 'ADMIN_PANEL_QUICKSTART.md' }]
+          },
           'v2026.08.27': {
             status: 'Stable',
             releaseDate: 'August 27, 2026',
@@ -1979,7 +2080,7 @@
     };
 
     var selectedProduct = 'secureone';
-    var selectedVersion = 'v2026.08.27';
+    var selectedVersion = 'v2026.09.18';
     var navRoot = document.getElementById('releaseNav');
     var contentRoot = document.getElementById('releaseContent');
 
