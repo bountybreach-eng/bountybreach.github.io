@@ -239,7 +239,7 @@ docker pull "$SECUREONE_IMAGE"
 
 docker pull "$SCAN_AGENT_IMAGE"
 
-docker pull "$BOUNTYBREACH_AI_FOUNDATION_IMAGE"
+docker pull --platform linux/amd64 "$BOUNTYBREACH_AI_FOUNDATION_IMAGE"
 
 docker pull "$JENKINS_IMAGE"
 
