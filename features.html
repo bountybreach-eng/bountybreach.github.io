@@ -67,6 +67,10 @@
         <p>Validate live application behavior and identify exploitable vulnerabilities beyond static analysis.</p>
       </div>
       <div class="card">
+        <h3>AI Pentesting</h3>
+        <p>Run a standalone Playwright crawl through a SecureOne Scan Agent / Work Node and send collected evidence to AI Foundation for potential vulnerability analysis.</p>
+      </div>
+      <div class="card">
         <h3>AI Automatic Remediation Foundation</h3>
         <p>Configure SAST finding eligibility, repository scope, severity and risk criteria, and retry limits for the upcoming continuous AI remediation workflow.</p>
       </div>
@@ -75,6 +79,30 @@
         <p>Submit managed penetration testing requests through the platform and track findings in one place.</p>
       </div>
     </div>
+  </section>
+
+  <section>
+    <h2>AI Pentesting with Multiple Evidence Sources</h2>
+    <p class="section-subtitle">A dedicated workflow for authorized web application assessments, separate from existing DAST execution.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Playwright Crawler <span class="tag">Available</span></h3>
+        <ul>
+          <li>Crawl an authorized target using the dedicated Crawler Scan Agent / Work Node.</li>
+          <li>Collect page and HTTP evidence for the selected target.</li>
+          <li>Send collected evidence to AI Foundation for analysis.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Proxy Crawler <span class="tag">Coming Soon</span></h3>
+        <p>Planned workflow for selecting a proxy and reusing supported existing DAST traffic artifacts, including ZAP-generated files.</p>
+      </div>
+      <div class="card">
+        <h3>HAR Crawler <span class="tag">Coming Soon</span></h3>
+        <p>Planned workflow for uploading, validating, and processing HAR traffic before AI Foundation analysis.</p>
+      </div>
+    </div>
+    <p class="section-subtitle">AI analysis may map potential weaknesses to OWASP Top 10 and CWE, including BOLA and IDOR indicators. AI-generated findings are not confirmed vulnerabilities and should be reviewed and validated.</p>
   </section>
 
   <section>

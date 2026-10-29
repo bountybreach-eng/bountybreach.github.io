@@ -445,6 +445,33 @@
   <p>SecureOne release center with instant version switching, installers, Docker, script viewers, and full release lifecycle notes.</p>
 </section>
 
+<section class="container" aria-labelledby="ai-pentesting-release-title">
+  <article class="dl-release-card">
+    <div class="dl-release-header">
+      <div class="dl-title-wrap">
+        <h2 id="ai-pentesting-release-title">SecureOne AI Pentesting</h2>
+        <div class="dl-release-meta">Release notes · October 27, 2026</div>
+      </div>
+      <span class="badge badge-stable">Feature Release</span>
+    </div>
+    <div class="dl-release-body">
+      <section class="dl-section">
+        <h3>What's New</h3>
+        <ul>
+          <li>Dedicated AI Pentesting navigation with a Playwright Crawler workflow integrated with Scan Agents / Work Nodes and AI Foundation.</li>
+          <li>AI Foundation analyzes collected crawl evidence for potential OWASP Top 10, CWE, BOLA, and IDOR-related weaknesses. AI-generated findings require human review and validation.</li>
+          <li>Proxy Crawler and HAR Crawler options are shown in the interface; their processing workflows are marked Coming Soon.</li>
+          <li>AI Pentesting remains separate from the existing DAST execution workflow.</li>
+        </ul>
+      </section>
+      <section class="dl-section">
+        <h3>Availability</h3>
+        <p>This entry documents a feature release and does not specify a new Docker image tag. Use the versioned packages in the release navigation for installation instructions.</p>
+      </section>
+    </div>
+  </article>
+</section>
+
 <div class="container dl-page-wrap">
   <aside class="dl-sidebar" aria-label="Release navigation">
     <h2 class="dl-sidebar-title">Products</h2>
@@ -466,7 +493,36 @@
             oneStepDeployment: {
         label: "One-Step Deployment",
         versions: {
-          "v2026.09.18": {
+                "v2026.10.27": {
+                  status: "Stable",
+                  releaseDate: "October 27, 2026",
+                  downloads: [
+                    { platform: "Shell Script", type: "deploy-ghcr-stack-v2026.10.27.sh", action: "deploy-ghcr-stack-v2026.10.27.sh", mode: "download" },
+                    { platform: "Linux / macOS", type: "./deploy-ghcr-stack.sh v2026.10.27", action: "chmod +x deploy-ghcr-stack.sh\n./deploy-ghcr-stack.sh v2026.10.27", mode: "copy" },
+                    { platform: "Windows", type: "bash ./deploy-ghcr-stack.sh v2026.10.27", action: "bash ./deploy-ghcr-stack.sh v2026.10.27", mode: "copy" }
+                  ],
+                  install: {
+                    windows: ["Open Git Bash in the deployment folder.", "Run: bash ./deploy-ghcr-stack.sh v2026.10.27"],
+                    linux: ["chmod +x deploy-ghcr-stack.sh", "./deploy-ghcr-stack.sh v2026.10.27"],
+                    docker: ["Deploys the SecureOne v2026.10.27 release with the coordinated Scan Agent and AI Foundation images.", "Starts the complete stack."],
+                    macos: ["Use the Linux installation steps in Terminal."]
+                  },
+                  scripts: [],
+                  requirements: ["Docker Engine 24.x or later", "Docker Compose", "Git Bash on Windows", "Internet access for image pulls"],
+                  releaseNotes: {
+                    newFeatures: ["One-Step Deployment v2026.10.27 packages the SecureOne v2026.10.27 release."],
+                    improvements: ["Clarified the deployment package version separately from its SecureOne component version."],
+                    bugFixes: ["None."],
+                    breakingChanges: ["None."],
+                    securityUpdates: ["No changes to the SecureOne v2026.10.27 component."]
+                  },
+                  knownIssues: ["Docker Desktop must be running before deployment."],
+                  upgradeNotes: ["This deployment uses SecureOne v2026.10.27. The deployment package version does not change the component image version."],
+                  docs: [{ label: "Deployment Guide", href: "deployment.html" }],
+                  componentVersion: "v2026.10.27",
+                  dockerImage: "ghcr.io/bountybreach/secureone:v2026.10.27"
+                },
+                "v2026.09.18": {
             status: "Stable",
             releaseDate: "September 18, 2026",
             downloads: [
@@ -1057,6 +1113,30 @@
       secureone: {
         label: 'SecureOne',
         versions: {
+          'v2026.10.27': {
+            status: 'Stable',
+            releaseDate: 'October 27, 2026',
+            dockerImage: 'ghcr.io/bountybreach/secureone:v2026.10.27',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '4 GB RAM recommended'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/secureone:v2026.10.27', action: 'docker pull ghcr.io/bountybreach/secureone:v2026.10.27', mode: 'copy' }],
+            install: {
+              windows: ['Run: bash ./docker-start.sh v2026.10.27', 'Run: bash ./docker-run-local.sh v2026.10.27'],
+              linux: ['Run: chmod +x docker-start.sh docker-run-local.sh', 'Run: ./docker-start.sh v2026.10.27', 'Run: ./docker-run-local.sh v2026.10.27'],
+              docker: ['Pull ghcr.io/bountybreach/secureone:v2026.10.27 and start the local stack.'],
+              macos: ['Follow the Linux steps in Terminal.']
+            },
+            scripts: [{ title: 'secureone/docker-start.sh', path: 'secureone/docker-start.sh' }, { title: 'secureone/docker-run-local.sh', path: 'secureone/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['Introduced a dedicated AI Pentesting interface with Playwright, Proxy, and HAR crawler mode selection.', 'Added the standalone Playwright crawling workflow with Scan Agent / Work Node and AI Foundation integration.'],
+              improvements: ['AI Pentesting is orchestrated separately from the existing DAST execution workflow.', 'AI analysis can assess collected evidence for potential OWASP Top 10 and CWE-related weaknesses, including BOLA and IDOR indicators.'],
+              bugFixes: ['Improved delivery of queued DAST jobs and target URL information to scan agents.', 'Added ZAP report ingestion for DAST scan results.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['AI-generated pentest findings are presented as potential issues and require human review and validation.', 'AI Pentesting is intended for authorized assessments and approved targets.']
+            },
+            knownIssues: ['Proxy Crawler and HAR Crawler processing workflows are Coming Soon.'],
+            upgradeNotes: ['Review the AI Pentesting setup and register an online Crawler Scan Agent / Work Node before starting a Playwright crawl.'],
+            docs: [{ label: 'User Manual', href: 'docs.html' }, { label: 'Product Overview', href: 'features.html' }, { label: 'Deployment Guide', href: 'deployment.html' }]
+          },
           'v2026.09.18': {
             status: 'Stable',
             releaseDate: 'September 18, 2026',
@@ -1441,6 +1521,30 @@
       scanAgents: {
         label: 'SecureOne Scan Agents',
         versions: {
+          'v2026.10.27': {
+            status: 'Stable',
+            releaseDate: 'October 27, 2026',
+            dockerImage: 'ghcr.io/bountybreach/secureone_scan_agent:v2026.10.27',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '2 GB RAM minimum'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/secureone_scan_agent:v2026.10.27', action: 'docker pull ghcr.io/bountybreach/secureone_scan_agent:v2026.10.27', mode: 'copy' }],
+            install: {
+              windows: ['Run: bash ./docker-start.sh v2026.10.27', 'Run: bash ./docker-run-local.sh v2026.10.27'],
+              linux: ['Run: chmod +x docker-start.sh docker-run-local.sh', 'Run: ./docker-start.sh v2026.10.27', 'Run: ./docker-run-local.sh v2026.10.27'],
+              docker: ['Pull the Scan Agent image and launch it with the local orchestrator.'],
+              macos: ['Use the Linux commands in Terminal.']
+            },
+            scripts: [{ title: 'secureone_scan_agents/docker-start.sh', path: 'secureone_scan_agents/docker-start.sh' }, { title: 'secureone_scan_agents/docker-run-local.sh', path: 'secureone_scan_agents/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['Added Playwright Crawler Scan Agent / Work Node support for the AI Pentesting workflow.', 'Added the OWASP ZAP stable 2.17.0 tool image to the default tool image catalog.'],
+              improvements: ['Crawler jobs collect request and response evidence for the selected target and return it to SecureOne.', 'Added local pre-pull support for configured tool images while retaining job-time pull as a fallback.'],
+              bugFixes: ['Fixed Docker license lookup so SECUREONE_LICENSE_FILE and SECUREONE_LICENSE_PUBLIC_KEY_PATH are honored at runtime.', 'Improved DAST job dispatch and ZAP result upload with the target web configuration.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['Crawler execution remains isolated in Docker containers and is limited to authorized targets.']
+            },
+            knownIssues: ['The Proxy Crawler and HAR Crawler agent workflows are Coming Soon.'],
+            upgradeNotes: ['Rebuild local agent images when using local Docker builds. Ensure Docker is available to the agent for tool image pulls and container execution.'],
+            docs: [{ label: 'Agent Docs', href: 'docs.html' }, { label: 'Integrations', href: 'integrations.html' }]
+          },
           'v2026.09.18': {
             status: 'Stable',
             releaseDate: 'September 18, 2026',
@@ -1800,6 +1904,30 @@
       aiFoundation: {
         label: 'BountyBreach AI Foundation',
         versions: {
+          'v2026.10.27': {
+            status: 'Stable',
+            releaseDate: 'October 27, 2026',
+            dockerImage: 'ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.10.27',
+            requirements: ['Docker Engine ≥ 24.x', 'Linux, macOS, or Windows with Docker Desktop', '8 GB RAM recommended for local AI workflows'],
+            downloads: [{ platform: 'Docker', type: 'docker pull ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.10.27', action: 'docker pull ghcr.io/bountybreach/bountybreach-ai-foundation:v2026.10.27', mode: 'copy' }],
+            install: {
+              windows: ['Install Docker Desktop and run the foundation startup script from Git Bash.'],
+              linux: ['Use the compose or startup scripts from the project root.'],
+              docker: ['Pull and run the foundation v2026.10.27 image with the required environment variables.'],
+              macos: ['Use the Linux installation flow in Terminal.']
+            },
+            scripts: [{ title: 'bountybreach-ai-foundation/docker-start.sh', path: 'bountybreach-ai-foundation/docker-start.sh' }, { title: 'bountybreach-ai-foundation/docker-run-local.sh', path: 'bountybreach-ai-foundation/docker-run-local.sh' }],
+            releaseNotes: {
+              newFeatures: ['Added the AI Pentesting analysis action for analyzing redacted Playwright crawl evidence.', 'Supports analysis of potential OWASP Top 10 and CWE-related weaknesses, including BOLA and IDOR indicators.'],
+              improvements: ['Pentest analysis requests use evidence-focused prompts and expect structured JSON findings with evidence references.'],
+              bugFixes: ['Registered and mapped the AI_PENTEST_ANALYZE action for SecureOne agent authorization.'],
+              breakingChanges: ['None.'],
+              securityUpdates: ['Untrusted target content is treated as evidence, not instructions; AI-generated findings require human validation.']
+            },
+            knownIssues: ['Proxy Crawler and HAR Crawler analysis workflows are Coming Soon.'],
+            upgradeNotes: ['Configure the AI_PENTEST_ANALYZE action and SecureOne agent mapping when upgrading an existing deployment.'],
+            docs: [{ label: 'Foundation Docs', href: 'docs.html' }]
+          },
           'v2026.09.18': {
             status: 'Stable',
             releaseDate: 'September 18, 2026',
@@ -2080,7 +2208,7 @@
     };
 
     var selectedProduct = 'secureone';
-    var selectedVersion = 'v2026.09.18';
+    var selectedVersion = 'v2026.10.27';
     var navRoot = document.getElementById('releaseNav');
     var contentRoot = document.getElementById('releaseContent');
 
@@ -2229,7 +2357,7 @@
       contentRoot.innerHTML = '' +
         '<article class="dl-release-card">' +
           '<div class="dl-release-header">' +
-            '<div class="dl-title-wrap"><h2>' + product.label + ' ' + selectedVersion + '</h2><div class="dl-release-meta">Released: ' + fallbackRelease.releaseDate + '</div></div>' +
+            '<div class="dl-title-wrap"><h2>' + product.label + ' ' + selectedVersion + (fallbackRelease.componentVersion ? '. secureone ' + fallbackRelease.componentVersion + ' ★' : '') + '</h2><div class="dl-release-meta">Released: ' + fallbackRelease.releaseDate + '</div></div>' +
             stableBadge(fallbackRelease.status) +
           '</div>' +
           '<div class="dl-release-body">' +
